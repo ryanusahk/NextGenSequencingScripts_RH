@@ -4,16 +4,21 @@ import sys
 import gzip
 import subprocess
 import time
+import sys
+from os.path import expanduser
 
-unzippedDirectory = 'unzippedData'
+unzippedDirectory = sys.argv[1]
 
 # Create Log File
 fullLog = open('merge_report.log', 'w')
 fullLog.close()
 
+# http://atacama.qb3.berkeley.edu/auto/sahara/namib/home/ryanhsu/bin/pear
 
 def runPear(pair):
-	args = ['./pear', '-f', unzippedDirectory + '/' + pair[0], '-r', unzippedDirectory + '/' + pair[1], '-o', pair[0].split('_')[0], '-j', '8']
+
+	home = expanduser("~")
+	args = [home + '/bin/pear', '-f', unzippedDirectory + '/' + pair[0], '-r', unzippedDirectory + '/' + pair[1], '-o', pair[0].split('_')[0], '-j', '8']
 
 	print time.strftime('%c') + '\n'
 	print 'Running PEAR on ' + str(pair) + '\n'
