@@ -16,7 +16,6 @@ fullLog.close()
 # http://atacama.qb3.berkeley.edu/auto/sahara/namib/home/ryanhsu/bin/pear
 
 def runPear(pair):
-
 	home = expanduser("~")
 	args = [home + '/bin/pear', '-f', unzippedDirectory + '/' + pair[0], '-r', unzippedDirectory + '/' + pair[1], '-o', pair[0].split('_')[0], '-j', '8']
 
