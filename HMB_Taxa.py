@@ -92,7 +92,10 @@ def usearch(assembledFile):
 			'-db', HMB_DATABASE, 
 			'-blast6out', BLAST6OUTPUT,
 			'-strand', 'both',
-			'-id', '.95']
+			"-maxhits", "32",
+	        "-maxaccepts", "1",
+	        "-maxrejects", "32",
+			'-id', '.975']
 
 	process = subprocess.Popen(args, stdout=subprocess.PIPE)
 
