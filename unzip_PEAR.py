@@ -40,13 +40,13 @@ def runPear(pair):
 	fullLog.write('\n')
 	fullLog.close()
 
-# for root, subdirs, files in os.walk(walk_dir):
-# 	if len(files) > 0:
-# 		for f in files:
-# 			if f.split('.')[-1] == 'gz':
-# 				print 'Copying/Unzipping ' + f
-# 				call(["cp", os.path.join(root, f), UNZIPPED_DIRECTORY])
-# 				call(["gunzip", UNZIPPED_DIRECTORY + f])
+for root, subdirs, files in os.walk(walk_dir):
+	if len(files) > 0:
+		for f in files:
+			if f.split('.')[-1] == 'gz':
+				print 'Copying/Unzipping ' + f
+				call(["cp", os.path.join(root, f), UNZIPPED_DIRECTORY])
+				call(["gunzip", UNZIPPED_DIRECTORY + f])
 
 # Create Log File
 fullLog = open('merge_report.log', 'w')
