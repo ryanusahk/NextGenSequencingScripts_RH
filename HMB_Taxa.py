@@ -124,7 +124,7 @@ def saveTallyHMB():
 	open(TALLY_HMB, 'w').write(jsonOutput)
 
 def saveTallyText():
-	tallyText = 'sample  '
+	tallyText = 'sampleWell\t'
 	for org in organism_database:
 		tallyText += '\t' + org
 
