@@ -14,6 +14,7 @@ ASSEMBLED_DIRECTORY = sys.argv[1]
 HMB_DATABASE = sys.argv[2]
 BLAST6OUTPUT = 'blast6/temp.blast6'
 FILTERED_DIRECTORY = 'filtered/'
+USEARCH_LOG = 'taxa.log'
 TALLY_TXT = 'tally.txt'
 TALLY_HMB = 'tally.hmb'
 REPORT_TXT = 'report.txt'
@@ -22,7 +23,7 @@ PATH_TO_USEARCH8 = '/bin/usearch8'
 ### FILTER OPTIONS ###
 MIN_LENGTH = 300
 F_ANNEALING_REGION = "ACTCCTACGGGAGGCAGCAGTG"
-R_ANNEALING_REGION = "CACTGCTGCCTCCCGTAGGAGT"
+R_ANNEALING_REGION = "GGATTAGATACCCTGGTAGTCC"
 
 if not os.path.exists('blast6'):
     os.makedirs('blast6')
@@ -32,7 +33,6 @@ if not os.path.exists('filtered'):
 # Create Log File
 sample_dictionary = dict()
 organism_database = []
-
 
 # http://atacama.qb3.berkeley.edu/auto/sahara/namib/home/ryanhsu/bin/pear
 
@@ -59,9 +59,9 @@ def filterFastQ(assembledFile):
 		if len(seq) > MIN_LENGTH:
 			fphasingIndex = seq.find(F_ANNEALING_REGION, 0, 36)
 			rphasingIndex = seq.find(R_ANNEALING_REGION, len(seq)-36, len(seq))
-			print rphasingIndex
+
 			if fphasingIndex >= 0:
-				filteredSeq = seq[fphasingIndex:]
+				filteredSeq = seq[fphasingIndex:rphasingIndex]
 				filteredFastQ += ">Sequence" + str(seqNum) + '\n' + filteredSeq + '\n'
 	open(FILTERED_DIRECTORY + newFileName, 'w').write(filteredFastQ)
 	
@@ -100,11 +100,11 @@ def usearch(assembledFile):
 	        "-maxrejects", "32",
 			'-id', '.975']
 
-	process = subprocess.Popen(args, stdout=subprocess.PIPE)
 
-	# for line in iter(process.stdout.readline, ''):
-	# 	sys.stdout.write(line)
-
+	with open(USEARCH_LOG, "a+") as log:
+		process = subprocess.Popen(args, stdout=subprocess.PIPE)
+		for line in iter(process.stdout.readline, ''):
+			log.write(line)
 	process.wait()
 
 def findAssembledFASTQ(directoryList):
@@ -175,6 +175,7 @@ def saveReport():
 def argsToSampleID(plateSet, plate, letter, column):
 	return plateSet+"%02d"%(plate,)+letter+"%02d"%(column)
 
+
 def main():
 	global organism_database
 	organism_database = getAllOrganisms(HMB_DATABASE)
@@ -183,12 +184,13 @@ def main():
 	fastQs = findAssembledFASTQ(directoryListing)
 
 	for fqIndex in range(len(fastQs)):
-		print "Filtering " + str(fastQs[fqIndex]) + '\t' + str(100.0*fqIndex/len(fastQs)) + '%' 
+		print "Filtering " + str(fastQs[fqIndex]) + '\t' + str(fqIndex+1) + '/' + str(len(fastQs))
 		filterFastQ(fastQs[fqIndex])
 
 	directoryListing = listdir(os.path.dirname(os.path.abspath(__file__)) + '/' + FILTERED_DIRECTORY)
 	filteredFASTAs = findFilteredFASTA(directoryListing)
 
+	open(USEARCH_LOG, 'w').write('')
 	for i in range(len(filteredFASTAs)):
 		f = filteredFASTAs[i]
 		sample_name = f[:8]
@@ -196,8 +198,9 @@ def main():
 		print 'PROGRESS: ' + str(i+1) + '/' + str(len(filteredFASTAs)) + '   ' + str((100.0*i)/len(filteredFASTAs)) + '%'
 		print 'Running USEARCH on ' + f
 		usearch(FILTERED_DIRECTORY + '/' + f)
-		print 'Tallying ' + f
+		print '\nTallying ' + f
 		tally(sample_name)
+
 	# print sample_dictionary['HMB01A01']
 	saveTallyText()
 	saveTallyHMB()
