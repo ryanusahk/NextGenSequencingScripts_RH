@@ -23,6 +23,8 @@ PATH_TO_USEARCH8 = '/bin/usearch8'
 MIN_LENGTH = 300
 F_ANNEALING_REGION = "ACTCCTACGGGAGGCAGCAGTG"
 R_ANNEALING_REGION = "CACTGCTGCCTCCCGTAGGAGT"
+MAX_PLATE_ID = 20
+
 
 if not os.path.exists('blast6'):
     os.makedirs('blast6')
@@ -132,7 +134,7 @@ def saveTallyText():
 		tallyText += '\t' + org
 
 	plateSet = 'HMB'
-	for platenum in range(1,13):
+	for platenum in range(1,MAX_PLATE_ID):
 		for letter in 'ABCDEFGH':
 			for column in range(1,13):
 				sampleID = argsToSampleID(plateSet, platenum, letter, column)
@@ -149,7 +151,7 @@ def saveReport():
 	reportText = 'sample\tReads\tOrganisms Over 5%'
 
 	plateSet = 'HMB'
-	for platenum in range(1,13):
+	for platenum in range(1,MAX_PLATE_ID):
 		for letter in 'ABCDEFGH':
 			for column in range(1,13):
 				sampleID = argsToSampleID(plateSet, platenum, letter, column)
