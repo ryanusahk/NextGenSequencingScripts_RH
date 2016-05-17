@@ -25,7 +25,7 @@ The merged fasta files are outputted to a 'assembled' directory.
 ###Step 2 - Assign Taxa and Generate Tally File:
 Run:
 ```
-python HMB_Taxa assembled/ HMB_Database4.fa
+python HMB_Taxa.py assembled/ HMB_Database4.fa
 ```
 
 This script will first scan through each merged file and discard improper amplicons and also trim the phasing off proper amplicons. The filtered amplicons get put into a folder 'filtered'
