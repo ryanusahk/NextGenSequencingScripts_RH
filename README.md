@@ -4,6 +4,7 @@
 
 ###You will need:
 * USEARCH 8.0+ installed and in your PATH
+* PEAR installed and in your PATH
 * Copy these files to a working directory:
   * unzip_PEAR.py
   * HMB_Taxa.py
