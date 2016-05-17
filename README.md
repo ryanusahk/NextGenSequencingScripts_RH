@@ -1,5 +1,5 @@
 #Running the HMB_Taxa Pipeline
-###This set of scripts only works with indexed primers as specified in the sample sheet generator.
+####This set of scripts only works with indexed primers as specified in the sample sheet generator.
 
 
 ###You will need:
