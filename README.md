@@ -1,6 +1,5 @@
 #Running the HMB_Taxa Pipeline
-#####This set of scripts only works with indexed primers as specified in the sample sheet generator.
-#####It is also backwards compatible with the multiple versions of phasing previously used in primers.
+#####This set of scripts only works with indexed primers as specified in the sample sheet generator. It is also backwards compatible with the multiple versions of phasing previously used in primers.
 
 
 ###You will need:
