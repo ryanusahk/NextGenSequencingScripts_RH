@@ -10,6 +10,11 @@
   * HMB_Taxa.py
   * HMB_Database4.fa
 
+###Step 0 - Start a screen:
+Since these scripts can take a while to run, it is recommended to start a 'screen' by running:
+```
+screen
+```
 
 ###Step 1 - Unzip and Merge:
 Copy the raw unzipped NGS data from BaseSpace or the MiSeq into a directory named 'zipped'. The scripts are compatible with both the MiSeq file structure and BaseSpace file structure.
