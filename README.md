@@ -10,7 +10,7 @@
   * HMB_Taxa.py
   * HMB_Database4.fa
 
-###Step 0 - Start a screen:
+###Step 0 - Start a screen (optional):
 Since these scripts can take a while to run, it is recommended to start a 'screen' by running:
 ```
 screen
