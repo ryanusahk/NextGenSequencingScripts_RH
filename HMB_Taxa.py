@@ -62,8 +62,8 @@ def filterFastQ(assembledFile):
 			fphasingIndex = seq.find(F_ANNEALING_REGION, 0, 36)
 			rphasingIndex = seq.find(R_ANNEALING_REGION, len(seq)-36, len(seq))
 			print rphasingIndex
-			if fphasingIndex >= 0:
-				filteredSeq = seq[fphasingIndex:]
+			if fphasingIndex >= 0 and rphasingIndex > 0:
+				filteredSeq = seq[fphasingIndex:rphasingIndex+len(R_ANNEALING_REGION)]
 				filteredFastQ += ">Sequence" + str(seqNum) + '\n' + filteredSeq + '\n'
 	open(FILTERED_DIRECTORY + newFileName, 'w').write(filteredFastQ)
 	
