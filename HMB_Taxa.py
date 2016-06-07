@@ -22,7 +22,7 @@ PATH_TO_USEARCH8 = '/bin/usearch8'
 ### FILTER OPTIONS ###
 MIN_LENGTH = 300
 F_ANNEALING_REGION = "ACTCCTACGGGAGGCAGCAGTG"
-R_ANNEALING_REGION = "CACTGCTGCCTCCCGTAGGAGT"
+R_ANNEALING_REGION = "GGATTAGATACCCTGGTAGTCC"
 MAX_PLATE_ID = 20
 
 
@@ -100,7 +100,6 @@ def usearch(assembledFile):
 			"-maxhits", "32",
 	        "-maxaccepts", "1",
 	        "-maxrejects", "32",
-	        "-threads", "8",
 			'-id', '.975']
 
 	process = subprocess.Popen(args, stdout=subprocess.PIPE)
