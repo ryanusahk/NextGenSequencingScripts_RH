@@ -100,6 +100,7 @@ def usearch(assembledFile):
 			"-maxhits", "32",
 	        "-maxaccepts", "1",
 	        "-maxrejects", "32",
+	        "-threads", "8",
 			'-id', '.975']
 
 	process = subprocess.Popen(args, stdout=subprocess.PIPE)
