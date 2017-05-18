@@ -1,8 +1,8 @@
-#Running the HMB_Taxa Pipeline
-#####This set of scripts only works with indexed primers as specified in the sample sheet generator. It is also backwards compatible with the multiple versions of phasing previously used in primers.
+# Running the HMB_Taxa Pipeline
+##### This set of scripts only works with indexed primers as specified in the sample sheet generator. It is also backwards compatible with the multiple versions of phasing previously used in primers.
 
 
-###You will need:
+### You will need:
 * USEARCH 8.0+ installed and in your PATH
 * PEAR installed and in your PATH
 * Copy these files to a working directory:
@@ -10,13 +10,13 @@
   * HMB_Taxa.py
   * HMB_Database4.fa
 
-###Step 0 - Start a screen (optional):
+### Step 0 - Start a screen (optional):
 Since these scripts can take a while to run, it is recommended to start a 'screen' by running:
 ```
 screen
 ```
 
-###Step 1 - Unzip and Merge:
+### Step 1 - Unzip and Merge:
 Copy the raw unzipped NGS data from BaseSpace or the MiSeq into a directory named 'zipped'. The scripts are compatible with both the MiSeq file structure and BaseSpace file structure.
 Call unzip_PEAR.py to unzip the files and merge the reads:
 ```
@@ -27,7 +27,7 @@ This will give you a live output of the unzipping/merging status. The outputs of
 The merged fasta files are outputted to a 'assembled' directory.
 
 
-###Step 2 - Assign Taxa and Generate Tally File:
+### Step 2 - Assign Taxa and Generate Tally File:
 Run:
 ```
 python HMB_Taxa.py assembled/ HMB_Database4.fa
